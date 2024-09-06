@@ -1,4 +1,4 @@
-<div align="center"><strong>Start to code in solidity with the ETH Kipu starter pack</strong></div>
+<div align="center"><strong>Start to code in solidity with ETH Kipu</strong></div>
 
 <br />
 
