@@ -1,20 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import {HeyKipu} from 'contracts/HeyKipu.sol';
+import {HeyKipu, IHeyKipu} from 'contracts/HeyKipu.sol';
 import {Script} from 'forge-std/Script.sol';
 
-contract Deploy is Script {
-  address _owner;
+abstract contract Deploy is Script {
+  // Deployed contract
+  IHeyKipu public heyKipu;
 
-  function setUp() public {
+  // Deployer EOA
+  address public owner;
+  uint256 internal _deployerPk;
+
+  function setUp() public virtual {
     // Sepolia
-    _owner = vm.envAddress('SEPOLIA_DEPLOYER_ADDRESS');
+    _deployerPk = vm.envUint('DEPLOYER_PK');
+    owner = vm.envAddress('SEPOLIA_DEPLOYER_ADDRESS');
   }
 
   function run() public {
     vm.startBroadcast();
-    new HeyKipu(_owner);
+    heyKipu = new HeyKipu(owner);
     vm.stopBroadcast();
   }
 }

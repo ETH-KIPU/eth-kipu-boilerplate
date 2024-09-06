@@ -8,9 +8,9 @@ contract IntegrationHeyKipu is IntegrationBase {
     // it sets the greeting
     string memory _greeting = 'Hey, Kipu!';
 
-    vm.prank(_owner);
-    _keyKipu.setGreeting(_greeting);
+    vm.prank(owner);
+    heyKipu.setGreeting(_greeting);
 
-    assertEq(_keyKipu.greeting(), _greeting);
+    assertEq(heyKipu.greeting(), _greeting);
   }
 }

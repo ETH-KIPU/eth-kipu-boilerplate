@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import {HeyKipu, IHeyKipu} from 'contracts/HeyKipu.sol';
 import {Test} from 'forge-std/Test.sol';
+import {Deploy} from 'script/Deploy.sol';
 
-contract IntegrationBase is Test {
-  uint256 internal constant _FORK_BLOCK = 18_920_905;
+contract IntegrationBase is Deploy, Test {
+  uint256 internal constant _FORK_BLOCK = 6_643_655;
 
-  address internal _owner = makeAddr('owner');
-  IHeyKipu internal _keyKipu;
+  function setUp() public virtual override {
+    vm.createSelectFork(vm.envString('SEPOLIA_RPC'), _FORK_BLOCK);
 
-  function setUp() public {
-    vm.createSelectFork(vm.rpcUrl('sepolia'), _FORK_BLOCK);
-    _keyKipu = new HeyKipu(_owner);
+    // Deployer setup
+    _deployerPk = vm.deriveKey('test test test test test test test test test test test junk', 0);
+    owner = makeAddr('Owner');
+
+    run();
   }
 }
