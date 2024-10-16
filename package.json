@@ -30,6 +30,9 @@
     "test/**/*.sol": "yarn lint:sol-tests",
     "package.json": "sort-package-json"
   },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
